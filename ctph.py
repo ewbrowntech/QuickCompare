@@ -7,10 +7,16 @@ ctph.py
 Perform the Context-Triggered Piecewise Hashing algorithm
 """
 from block_size import compute_initial_block_size
+from rolling_hash import RollingHash
 
 
 def perform_ctph(filepath):
     signature = ""
-    initial_block_size = compute_initial_block_size(filepath)
-    
+    block_size = compute_initial_block_size(filepath)
+
+    done = False
+    while not done:
+        rolling_hash = RollingHash(block_size)
+        done = True
+
     return signature

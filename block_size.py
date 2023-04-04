@@ -22,5 +22,10 @@ def compute_initial_block_size(filepath):
     # more information about its respective file, but is more computationally expensive to compare against another
     SS_LENGTH = 64
 
-    initial_block_size = MIN_BLOCK_SIZE * math.pow(2, (math.log2(filesize / (SS_LENGTH * MIN_BLOCK_SIZE))))
+    # This is an implementation of Equation 4 in the referenced paper
+    initial_block_size = MIN_BLOCK_SIZE * (2 ** (math.log2(filesize / (SS_LENGTH * MIN_BLOCK_SIZE))))
+
+    # We will round to the nearest power of 2 to enable more efficient bitwise operations
+    initial_block_size = 2 ** math.floor(math.log2(initial_block_size))
+
     return initial_block_size
