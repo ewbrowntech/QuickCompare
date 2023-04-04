@@ -6,9 +6,14 @@ block_size.py
 
 Compute the initial block size for the algorithm
 """
+import math
+import os
 
 
-def compute_initial_block_size():
-    min_block_size = 32
-    ss_length = 32
-    return 0
+def compute_initial_block_size(filepath):
+    filesize = os.stat(filepath).st_size
+    min_block_size = 3
+    ss_length = 64
+
+    initial_block_size = min_block_size * math.pow(2, (math.log2(filesize / (ss_length * min_block_size))))
+    return initial_block_size

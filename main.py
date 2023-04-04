@@ -12,14 +12,19 @@ from block_size import compute_initial_block_size
 
 def main():
     arg_parser = argparse.ArgumentParser(add_help=False)
+    arg_parser.add_argument('-i', '--ibs', action='store_true')
     arg_parser.add_argument('filepath1')
     arg_parser.add_argument('filepath2')
     args = arg_parser.parse_args()
 
-    print("Target File:\t" + args.filepath1)
-    print("Reference File:\t" + args.filepath2)
+    # target = open(args.filepath1, "rb")
+    print("Target File:\t\t" + args.filepath1)
+    # reference = open(args.filepath2, "rb")
+    print("Reference File:\t\t" + args.filepath2)
 
-    block_size = compute_initial_block_size()
+    initial_block_size = compute_initial_block_size(args.filepath1)
+    if args.ibs:
+        print("Initial Block Size:\t" + str(initial_block_size))
 
 
 if __name__ == '__main__':
