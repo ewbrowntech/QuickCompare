@@ -12,7 +12,6 @@ from traditional_hash import FNV_Hash
 
 
 def perform_ctph(filepath):
-    signature = ""
     block_size = compute_initial_block_size(filepath)
 
     done = False
@@ -22,7 +21,7 @@ def perform_ctph(filepath):
         traditional_hash2 = FNV_Hash
         signature1 = ""
         signature2 = ""
-        
+
         done = True
 
-    return signature
+    return str(block_size) + " : " + signature1 + " : " + signature2
