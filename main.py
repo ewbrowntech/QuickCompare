@@ -7,6 +7,7 @@ main.py
 Run the CTPH algorithm
 """
 import argparse
+from block_size import compute_initial_block_size
 
 
 def main():
@@ -17,7 +18,8 @@ def main():
 
     print("Target File:\t" + args.filepath1)
     print("Reference File:\t" + args.filepath2)
-    print()
+
+    block_size = compute_initial_block_size()
 
 
 if __name__ == '__main__':
