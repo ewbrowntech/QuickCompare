@@ -26,20 +26,22 @@ def main():
     print()
 
     if args.ibs:
+        print("----- Initial Block Size -----")
         initial_block_size = compute_initial_block_size(args.filepath1)
         print("Target Initial Block Size:\t" + str(initial_block_size))
         initial_block_size = compute_initial_block_size(args.filepath2)
         print("Reference Initial Block Size:\t" + str(initial_block_size))
-        print()
+        print("\n")
 
     target_signature = perform_ctph(args.filepath1)
     reference_signature = perform_ctph(args.filepath2)
     if args.signature:
+        print("--------- Signatures ---------")
         print("Target Signature:")
         print(target_signature)
         print("\nReference Signature:")
         print(reference_signature)
-        print()
+        print("\n")
 
 
 if __name__ == '__main__':
