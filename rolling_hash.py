@@ -17,15 +17,15 @@ class RollingHash:
         self.c = 0
         self.size = block_size
         self.window = array.array('i', [0] * self.size)
-        self.output = None
+        self.hash = None
 
-    def update_rolling_hash(self, index):
+    def update_rolling_hash(self, byte):
         self.y = self.y - self.x
-        self.y = self.y + self.size * index
-        self.x = self.x + index
+        self.y = self.y + self.size * byte
+        self.x = self.x + byte
         self.x = self.x - self.window[self.c % self.size]
-        self.window[self.c % self.size] = index
+        self.window[self.c % self.size] = byte
         self.c = self.c + 1
         self.z = self.z << 5
-        self.z = self.z ^ index
-        self.output = self.x + self.y + self.z
+        self.z = self.z ^ byte
+        self.hash = (self.x + self.y + self.z) & 0xffffffff
