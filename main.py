@@ -2,7 +2,7 @@
 main.py
 
 @Author - Ethan Brown - ewbrowntech@gmail.com
-@Version - 4 APR 23
+@Version - 7 APR 23
 
 Run the CTPH algorithm
 """
@@ -15,6 +15,7 @@ def main():
     arg_parser = argparse.ArgumentParser(add_help=False)
     arg_parser.add_argument('-i', '--ibs', action='store_true')
     arg_parser.add_argument('-s', '--signature', action='store_true')
+    arg_parser.add_argument('-t', '--trackers', action='store_true')
     arg_parser.add_argument('filepath1')
     arg_parser.add_argument('filepath2')
     args = arg_parser.parse_args()
@@ -40,6 +41,16 @@ def main():
         print_signature(target_signature)
         print("\nReference:")
         print_signature(reference_signature)
+        print("\n")
+
+    if args.trackers:
+        print("---------- Trackers ----------")
+        print("Target:")
+        print(target_signature['tracker1'])
+        print(target_signature['tracker2'])
+        print("\nReference:")
+        print(reference_signature['tracker1'])
+        print(reference_signature['tracker2'])
         print("\n")
 
 

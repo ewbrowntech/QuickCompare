@@ -2,7 +2,7 @@
 ctph.py
 
 @Author - Ethan Brown - ewbrowntech@gmail.com
-@Version - 6 APR 23
+@Version - 7 APR 23
 
 Perform the Context-Triggered Piecewise Hashing algorithm
 """
