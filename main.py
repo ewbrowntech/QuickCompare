@@ -25,27 +25,27 @@ def main():
     print("Reference File:\t" + args.filepath2)
     print()
 
-    if args.ibs:
-        print("----- Initial Block Size -----")
-        initial_block_size = compute_initial_block_size(args.filepath1)
-        print("Target Initial Block Size:\t" + str(initial_block_size))
-        initial_block_size = compute_initial_block_size(args.filepath2)
-        print("Reference Initial Block Size:\t" + str(initial_block_size))
-        print("\n")
-
     target_signature = perform_ctph(args.filepath1)
     reference_signature = perform_ctph(args.filepath2)
+
+    if args.ibs:
+        print("----- Initial Block Size -----")
+        print("Target Initial Block Size:\t" + str(target_signature['block_size']))
+        print("Reference Initial Block Size:\t" + str(reference_signature['block_size']))
+        print("\n")
+
     if args.signature:
         print("--------- Signatures ---------")
-        print("Target Signature:")
+        print("Target:")
         print_signature(target_signature)
-        print("\nReference Signature:")
+        print("\nReference:")
         print_signature(reference_signature)
         print("\n")
 
 
 def print_signature(signature):
-    print(str(signature["block_size"]) + " : " + signature["signature1"] + " : " + signature["signature2"])
+    print("Signature 1: " + signature["signature1"])
+    print("Signature 2: " + signature["signature2"])
 
 
 if __name__ == '__main__':
