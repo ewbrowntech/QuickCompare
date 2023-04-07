@@ -36,10 +36,10 @@ def perform_ctph(filepath):
                 traditional_hash1.update_hash(byte)
                 traditional_hash2.update_hash(byte)
                 if rolling_hash.hash % block_size == block_size - 1:
-                    hash1 = str(hex(traditional_hash1.ls6b % 64)[2:])
-                    signature1 += hash1
+                    fnv_hash = str(hex(traditional_hash1.ls6b % 64)[2:])
+                    signature1 += fnv_hash
                     tracker1.append({
-                        "hash": hash1,
+                        "hash": fnv_hash,
                         "start": indexer1,
                         "end": file.tell() - 1
                     })
@@ -47,10 +47,10 @@ def perform_ctph(filepath):
                     traditional_hash1 = FNV_Hash()
 
                 if rolling_hash.hash % (2 * block_size) == (2 * block_size) - 1:
-                    hash2 = str(hex(traditional_hash2.ls6b % 64)[2:])
-                    signature2 += hash2
+                    fnv_hash = str(hex(traditional_hash2.ls6b % 64)[2:])
+                    signature2 += fnv_hash
                     tracker2.append({
-                        "hash": hash2,
+                        "hash": fnv_hash,
                         "start": indexer2,
                         "end": file.tell() - 1
                     })
