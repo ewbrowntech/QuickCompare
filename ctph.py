@@ -23,7 +23,11 @@ def perform_ctph(filepath):
         traditional_hash1 = FNV_Hash()
         traditional_hash2 = FNV_Hash()
         signature1 = ""
+        tracker1 = []
         signature2 = ""
+        tracker2 = []
+        indexer1 = 0
+        indexer2 = 0
 
         with open(filepath, "rb") as file:
             while byte := file.read(1):
@@ -32,11 +36,25 @@ def perform_ctph(filepath):
                 traditional_hash1.update_hash(byte)
                 traditional_hash2.update_hash(byte)
                 if rolling_hash.hash % block_size == block_size - 1:
-                    signature1 += str(hex(traditional_hash1.ls6b % 64)[2:])
+                    hash1 = str(hex(traditional_hash1.ls6b % 64)[2:])
+                    signature1 += hash1
+                    tracker1.append({
+                        "hash": hash1,
+                        "start": indexer1,
+                        "end": file.tell() - 1
+                    })
+                    indexer1 = file.tell() - 1
                     traditional_hash1 = FNV_Hash()
 
                 if rolling_hash.hash % (2 * block_size) == (2 * block_size) - 1:
-                    signature2 += str(hex(traditional_hash2.ls6b % 64)[2:])
+                    hash2 = str(hex(traditional_hash2.ls6b % 64)[2:])
+                    signature2 += hash2
+                    tracker2.append({
+                        "hash": hash2,
+                        "start": indexer2,
+                        "end": file.tell() - 1
+                    })
+                    indexer2 = file.tell() - 1
                     traditional_hash2 = FNV_Hash()
             file.close()
 
@@ -45,4 +63,11 @@ def perform_ctph(filepath):
         else:
             done = True
 
-    return str(block_size) + " : " + signature1 + " : " + signature2
+    signature = {
+        "block_size": block_size,
+        "signature1": signature1,
+        "signature2": signature2,
+        "tracker1": tracker1,
+        "tracker2": tracker2
+    }
+    return signature

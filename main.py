@@ -38,10 +38,14 @@ def main():
     if args.signature:
         print("--------- Signatures ---------")
         print("Target Signature:")
-        print(target_signature)
+        print_signature(target_signature)
         print("\nReference Signature:")
-        print(reference_signature)
+        print_signature(reference_signature)
         print("\n")
+
+
+def print_signature(signature):
+    print(str(signature["block_size"]) + " : " + signature["signature1"] + " : " + signature["signature2"])
 
 
 if __name__ == '__main__':
